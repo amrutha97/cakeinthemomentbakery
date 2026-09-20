@@ -1,0 +1,2011 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <meta
+      name="description"
+      content="Cake in the Moment creates custom cakes and desserts in the Bothell and Seattle area."
+    />
+    <meta name="theme-color" content="#f4d7e2" />
+    <title>Cake in the Moment Bakery</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Allura&amp;family=Nunito+Sans:opsz,wght@6..12,300..700&amp;display=swap"
+      rel="stylesheet"
+    />
+    <link
+      rel="icon"
+      type="image/svg+xml"
+      href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 64 64'%3E%3Ccircle cx='32' cy='32' r='28' fill='%23f9edf2'/%3E%3Cg fill='none' stroke='%23b42363' stroke-width='3.5' stroke-linecap='round' stroke-linejoin='round'%3E%3Crect x='20' y='32' width='24' height='14' rx='3'/%3E%3Cpath d='M20 34c4 4 7-4 11 0s7-4 13 0M32 22v8M17 49h30'/%3E%3C/g%3E%3Cpath d='M32 13c3 2.5 3 5 0 6.5-3-1.5-3-4 0-6.5Z' fill='%23b42363'/%3E%3C/svg%3E"
+    />
+    <style>
+      :root {
+        color-scheme: light;
+        --background: #fffafd;
+        --foreground: #33222a;
+        --surface: #fffdfc;
+        --surface-glass: rgba(255, 253, 252, 0.96);
+        --primary: #a93d6d;
+        --primary-hover: #91305d;
+        --primary-foreground: #fffafd;
+        --secondary: #f8eff4;
+        --secondary-hover: #f0e0e9;
+        --secondary-foreground: #3b222c;
+        --muted-foreground: #77646d;
+        --border: #eadce3;
+        --ring: #c13584;
+        --instagram: #c13584;
+      }
+
+      * {
+        box-sizing: border-box;
+      }
+
+      html,
+      body {
+        width: 100%;
+        height: 100%;
+        margin: 0;
+      }
+
+      body {
+        overflow: hidden;
+        color: var(--foreground);
+        background:
+          radial-gradient(circle at 18% 18%, rgba(255, 255, 255, 0.96), transparent 26rem),
+          radial-gradient(circle at 82% 76%, rgba(239, 211, 224, 0.7), transparent 28rem),
+          linear-gradient(135deg, #fdf4f8 0%, #f3dce8 52%, #f6e4df 100%);
+        font-family: "Avenir Next", "Nunito Sans", "Helvetica Neue", Helvetica, Arial, sans-serif;
+      }
+
+      body::before {
+        position: fixed;
+        inset: 0;
+        z-index: -1;
+        content: "";
+        opacity: 0.22;
+        pointer-events: none;
+        background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 180 180' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='.9' numOctaves='3' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)' opacity='.25'/%3E%3C/svg%3E");
+      }
+
+      a {
+        color: inherit;
+      }
+
+      .page-shell {
+        position: relative;
+        display: grid;
+        grid-template-rows: auto minmax(0, 1fr) auto;
+        width: 100%;
+        height: 100svh;
+        height: 100dvh;
+        overflow: hidden;
+      }
+
+      .site-header {
+        position: sticky;
+        top: 0;
+        z-index: 10;
+        display: grid;
+        grid-template-columns: minmax(0, 1fr) auto;
+        align-items: center;
+        gap: clamp(1.25rem, 4vw, 4rem);
+        min-height: clamp(5.6rem, 8vw, 6.6rem);
+        padding: 0 clamp(1.25rem, 3.5vw, 3.25rem);
+        border-bottom: 1px solid var(--border);
+        background: var(--surface-glass);
+        backdrop-filter: blur(14px);
+      }
+
+      .brand-block {
+        display: flex;
+        align-items: center;
+        min-width: 0;
+      }
+
+      .brand-copy {
+        min-width: 0;
+      }
+
+      .wordmark {
+        font-family: "Allura", cursive;
+        font-size: clamp(2.25rem, 3.8vw, 3.15rem);
+        font-weight: 400;
+        line-height: 0.85;
+        letter-spacing: 0;
+        white-space: nowrap;
+      }
+
+      .nav-headline {
+        margin: 0.32rem 0 0;
+        color: var(--muted-foreground);
+        font-family: inherit;
+        font-size: clamp(0.76rem, 1.15vw, 0.92rem);
+        font-weight: 400;
+        line-height: 1.25;
+        letter-spacing: 0.005em;
+        white-space: nowrap;
+      }
+
+      .header-actions {
+        display: flex;
+        align-items: center;
+        justify-content: flex-end;
+        gap: clamp(0.9rem, 2vw, 1.5rem);
+      }
+
+      .secondary-cta {
+        display: inline-flex;
+        align-items: center;
+        gap: 0.48rem;
+        min-height: 3.2rem;
+        padding: 0.45rem 0.85rem;
+        border: 1px solid var(--border);
+        border-radius: 999px;
+        color: var(--secondary-foreground);
+        background: var(--secondary);
+        font-weight: 400;
+        text-decoration: none;
+        white-space: nowrap;
+        transition: color 180ms ease, background 180ms ease, border-color 180ms ease, transform 180ms ease;
+      }
+
+      .secondary-copy {
+        display: grid;
+        gap: 0.08rem;
+        line-height: 1.15;
+      }
+
+      .secondary-title {
+        font-size: 0.78rem;
+        font-weight: 500;
+      }
+
+      .secondary-handle {
+        color: var(--muted-foreground);
+        font-size: 0.68rem;
+        font-weight: 400;
+      }
+
+      .secondary-cta:hover,
+      .secondary-cta:focus-visible {
+        color: var(--primary);
+        background: var(--secondary-hover);
+        border-color: #dcaec2;
+        transform: translateY(-2px);
+      }
+
+      .secondary-cta:focus-visible {
+        border-radius: 0.25rem;
+        outline: 2px solid var(--ring);
+        outline-offset: 3px;
+      }
+
+      .instagram-icon {
+        width: 1.6rem;
+        height: 1.6rem;
+        flex: 0 0 auto;
+        color: var(--instagram);
+      }
+
+      .hero {
+        position: relative;
+        min-height: 0;
+        overflow: hidden;
+        background:
+          url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='420' height='420' viewBox='0 0 420 420'%3E%3Cfilter id='plaster'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='.42' numOctaves='4' seed='23' stitchTiles='stitch'/%3E%3CfeColorMatrix type='saturate' values='0'/%3E%3CfeComponentTransfer%3E%3CfeFuncA type='table' tableValues='0 .075'/%3E%3C/feComponentTransfer%3E%3C/filter%3E%3Crect width='420' height='420' fill='%23947e78' filter='url(%23plaster)' opacity='.42'/%3E%3C/svg%3E") center / 26.25rem 26.25rem repeat,
+          linear-gradient(180deg, rgba(255, 251, 245, 0.18) 0%, rgba(248, 239, 231, 0.1) 63%, rgba(206, 187, 183, 0.2) 100%),
+          radial-gradient(ellipse at 28% 18%, #fffaf0 0%, #faf4ed 34%, #f3ebe6 70%, #e9e0df 100%);
+        background-blend-mode: multiply, soft-light, normal;
+      }
+
+      .hero::before {
+        position: absolute;
+        inset: 0;
+        z-index: 0;
+        content: "";
+        pointer-events: none;
+        background:
+          radial-gradient(ellipse 62% 54% at 18% 5%, rgba(255, 221, 170, 0.3) 0%, rgba(255, 236, 207, 0.13) 42%, transparent 76%),
+          radial-gradient(ellipse 48% 48% at 91% 31%, rgba(224, 221, 235, 0.2) 0%, transparent 72%),
+          radial-gradient(ellipse at 50% 88%, rgba(142, 109, 104, 0.14), transparent 34%),
+          linear-gradient(103deg, rgba(255, 255, 255, 0.2), transparent 36%, rgba(166, 136, 148, 0.055));
+        box-shadow: inset 0 0 6rem rgba(104, 77, 81, 0.055);
+      }
+
+      .scene-decor {
+        position: absolute;
+        inset: 0;
+        z-index: 1;
+        overflow: hidden;
+        pointer-events: none;
+      }
+
+      .scene-decor::before {
+        position: absolute;
+        right: -4%;
+        bottom: -2%;
+        left: -4%;
+        height: 34%;
+        content: "";
+        border-top: 1px solid rgba(112, 84, 70, 0.2);
+        background:
+          url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='480' height='220' viewBox='0 0 480 220'%3E%3Cfilter id='wood' x='-15%25' y='-15%25' width='130%25' height='130%25'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='.012 .17' numOctaves='3' seed='11'/%3E%3CfeColorMatrix type='saturate' values='0'/%3E%3CfeComponentTransfer%3E%3CfeFuncA type='table' tableValues='0 .22'/%3E%3C/feComponentTransfer%3E%3C/filter%3E%3Crect width='480' height='220' fill='%238d7465' filter='url(%23wood)' opacity='.38'/%3E%3Cg fill='none' stroke='%238b7162' stroke-width='1.1' opacity='.12'%3E%3Cpath d='M-20 42C78 18 154 62 250 35S405 53 510 24'/%3E%3Cpath d='M-30 91C66 70 135 105 232 82S396 106 520 70'/%3E%3Cpath d='M-15 151C82 124 174 170 274 142S425 158 515 126'/%3E%3Cpath d='M-25 194C66 178 145 210 242 186S398 202 520 170'/%3E%3C/g%3E%3C/svg%3E") center / 30rem 13.75rem repeat,
+          radial-gradient(ellipse 4.6rem 1.25rem at 13% 67%, transparent 0 25%, rgba(112, 82, 66, 0.1) 28%, transparent 36%),
+          radial-gradient(ellipse 3.4rem 0.9rem at 72% 38%, transparent 0 22%, rgba(103, 76, 62, 0.08) 26%, transparent 35%),
+          linear-gradient(180deg, rgba(255, 255, 255, 0.62), rgba(229, 220, 211, 0.12)),
+          repeating-linear-gradient(
+            90deg,
+            #f8f4ee 0%,
+            #ece4dc 19.55%,
+            rgba(107, 81, 67, 0.22) 19.72%,
+            #d8cec4 19.88%,
+            #fffdf9 20.08%,
+            #f0e9e1 39.5%,
+            rgba(101, 77, 65, 0.18) 39.7%,
+            #d9d0c8 39.87%,
+            #fbf8f3 40.08%,
+            #eee6de 61.25%,
+            rgba(100, 75, 63, 0.2) 61.45%,
+            #d7cdc3 61.62%,
+            #fffdf8 61.82%,
+            #ece4dc 81.8%,
+            rgba(99, 73, 61, 0.2) 82%,
+            #d5cbc1 82.17%,
+            #faf6f0 82.37%,
+            #eee7df 100%
+          );
+        background-blend-mode: multiply, multiply, multiply, soft-light, normal;
+        box-shadow:
+          inset 0 1.25rem 2.8rem rgba(92, 68, 57, 0.055),
+          inset 0 -0.6rem 1.8rem rgba(255, 255, 255, 0.34),
+          0 -1.5rem 3rem rgba(91, 67, 78, 0.04);
+        filter: saturate(0.72) contrast(1.035);
+        transform: perspective(55rem) rotateX(1.8deg) scaleX(1.015);
+        transform-origin: bottom center;
+      }
+
+      .scene-decor::after {
+        position: absolute;
+        right: 9%;
+        bottom: 23%;
+        left: 9%;
+        height: 11%;
+        content: "";
+        border-radius: 50%;
+        background: radial-gradient(ellipse, rgba(88, 65, 75, 0.12), transparent 68%);
+        filter: blur(0.75rem);
+      }
+
+      .primary-cta {
+        display: inline-flex;
+        align-items: center;
+        justify-content: center;
+        gap: 0.52rem;
+        min-height: 3.2rem;
+        padding: 0.45rem 1rem;
+        border: 0;
+        border-radius: 999px;
+        color: var(--primary-foreground);
+        background: var(--primary);
+        box-shadow: 0 0.55rem 1.35rem rgba(126, 45, 82, 0.16);
+        font-size: 0.78rem;
+        font-weight: 600;
+        letter-spacing: 0.005em;
+        text-decoration: none;
+        transition: transform 180ms ease, box-shadow 180ms ease, background 180ms ease;
+      }
+
+      .chat-icon {
+        width: 1.6rem;
+        height: 1.6rem;
+        flex: 0 0 auto;
+        color: currentColor;
+      }
+
+      .primary-copy {
+        display: grid;
+        gap: 0.08rem;
+        line-height: 1.15;
+        text-align: left;
+      }
+
+      .primary-title {
+        font-size: 0.78rem;
+        font-weight: 600;
+      }
+
+      .primary-subtitle {
+        color: rgba(255, 250, 253, 0.8);
+        font-size: 0.68rem;
+        font-weight: 400;
+      }
+
+      .primary-cta:hover,
+      .primary-cta:focus-visible {
+        background: var(--primary-hover);
+        box-shadow: 0 0.75rem 1.65rem rgba(130, 24, 70, 0.24);
+        transform: translateY(-2px);
+      }
+
+      .primary-cta:focus-visible {
+        outline: 3px solid var(--ring);
+        outline-offset: 3px;
+      }
+
+      .cake-stage {
+        position: absolute;
+        inset: 0;
+        z-index: 2;
+        isolation: isolate;
+        overflow: hidden;
+      }
+
+      .cake-canvas {
+        position: absolute;
+        display: block;
+        border: 0;
+        outline: 0;
+      }
+
+      #three-canvas {
+        inset: 0;
+        width: 100%;
+        height: 100%;
+        opacity: 1;
+        filter: blur(0);
+        transform: scale(1);
+        transform-origin: center;
+        pointer-events: auto;
+        touch-action: pan-y;
+        transition:
+          opacity 820ms cubic-bezier(0.22, 1, 0.36, 1),
+          filter 820ms cubic-bezier(0.22, 1, 0.36, 1),
+          transform 820ms cubic-bezier(0.22, 1, 0.36, 1);
+      }
+
+      #three-canvas.is-entering {
+        opacity: 0;
+        filter: blur(5px);
+        transform: scale(1.012);
+      }
+
+      .site-footer {
+        position: sticky;
+        bottom: 0;
+        z-index: 10;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        gap: 0.45rem;
+        min-height: 3rem;
+        padding: 0.65rem 1rem;
+        border-top: 1px solid var(--border);
+        color: var(--muted-foreground);
+        background: rgba(255, 253, 252, 0.92);
+        font-size: 0.75rem;
+        font-weight: 400;
+        letter-spacing: 0.01em;
+        text-align: center;
+      }
+
+      .location-icon {
+        width: 0.95rem;
+        height: 0.95rem;
+        flex: 0 0 auto;
+        color: var(--instagram);
+      }
+
+      @media (max-width: 900px) {
+        .page-shell {
+          height: 100svh;
+          height: 100dvh;
+        }
+
+        .site-header {
+          grid-template-columns: 1fr;
+          gap: 0.72rem;
+          min-height: auto;
+          padding: 0.82rem 1rem 0.78rem;
+        }
+
+        .wordmark {
+          font-size: clamp(2rem, 9vw, 2.65rem);
+          white-space: normal;
+        }
+
+        .header-actions {
+          display: grid;
+          grid-template-columns: minmax(0, 0.85fr) minmax(0, 1.15fr);
+          width: 100%;
+          gap: 0.55rem;
+        }
+
+        .primary-cta,
+        .secondary-cta {
+          width: 100%;
+          min-height: 2.875rem;
+          padding: 0.58rem 0.72rem;
+        }
+
+        .nav-headline {
+          font-size: clamp(0.76rem, 3.5vw, 0.9rem);
+        }
+
+        .secondary-cta {
+          justify-content: center;
+        }
+
+        .secondary-copy {
+          display: block;
+        }
+
+        .secondary-title {
+          font-size: 0.76rem;
+        }
+
+        .secondary-handle {
+          display: none;
+        }
+
+        .site-footer {
+          min-height: 2.8rem;
+          padding: 0.55rem 0.8rem;
+          font-size: clamp(0.64rem, 2.7vw, 0.7rem);
+          line-height: 1.35;
+        }
+      }
+
+      @media (min-width: 310px) and (max-width: 760px) {
+        .scene-decor::before {
+          height: 30%;
+        }
+
+        .site-footer {
+          gap: 0.32rem;
+          padding-inline: 0.45rem;
+          white-space: nowrap;
+        }
+
+        .location-icon {
+          width: 0.82rem;
+          height: 0.82rem;
+        }
+      }
+
+      @media (max-width: 760px) and (max-height: 650px) and (orientation: portrait) {
+        .site-header {
+          gap: 0.52rem;
+          padding-block: 0.62rem;
+        }
+
+        .brand-mark {
+          width: 2.1rem;
+          height: 2.1rem;
+        }
+
+        .wordmark {
+          font-size: clamp(1.85rem, 8vw, 2.25rem);
+        }
+
+        .nav-headline {
+          margin-top: 0.18rem;
+          font-size: clamp(0.72rem, 3.3vw, 0.84rem);
+        }
+
+        .primary-cta,
+        .secondary-cta {
+          min-height: 2.65rem;
+        }
+
+      }
+
+      @media (max-width: 360px) {
+        .wordmark {
+          max-width: 12rem;
+          line-height: 0.95;
+          white-space: normal;
+        }
+
+        .primary-cta,
+        .secondary-cta {
+          gap: 0.38rem;
+          padding-inline: 0.55rem;
+        }
+
+        .primary-title,
+        .secondary-title {
+          font-size: 0.72rem;
+        }
+
+        .primary-subtitle {
+          font-size: 0.62rem;
+        }
+
+        .site-footer {
+          align-items: center;
+          line-height: 1.35;
+        }
+      }
+
+      @media (max-width: 300px) {
+        .header-actions {
+          grid-template-columns: 1fr;
+        }
+
+        .primary-cta,
+        .secondary-cta {
+          justify-self: stretch;
+        }
+
+        .site-footer {
+          white-space: normal;
+        }
+      }
+
+      @media (max-height: 520px) and (orientation: landscape) {
+        .scene-decor::before {
+          height: 32%;
+        }
+
+        .site-header {
+          grid-template-columns: minmax(0, 1fr) auto;
+          gap: 1rem;
+          min-height: auto;
+          padding: 0.48rem 1rem;
+        }
+
+        .wordmark {
+          font-size: 1.8rem;
+        }
+
+        .nav-headline {
+          margin-top: 0.15rem;
+          font-size: 0.7rem;
+        }
+
+        .header-actions {
+          width: auto;
+          grid-template-columns: auto auto;
+        }
+
+        .primary-cta,
+        .secondary-cta {
+          width: auto;
+          min-height: 2.5rem;
+        }
+
+        .site-footer {
+          min-height: 2.25rem;
+          padding-block: 0.35rem;
+        }
+
+      }
+
+      @media (prefers-reduced-motion: reduce) {
+        *,
+        *::before,
+        *::after {
+          scroll-behavior: auto !important;
+          animation-duration: 0.01ms !important;
+          animation-iteration-count: 1 !important;
+          transition-duration: 0.01ms !important;
+        }
+      }
+    </style>
+  </head>
+  <body>
+    <main class="page-shell">
+      <header class="site-header">
+        <div class="brand-block">
+          <div class="brand-copy">
+            <div class="wordmark">Cake in the Moment Bakery</div>
+            <h1 class="nav-headline" id="page-title">Custom Cakes &amp; Desserts</h1>
+          </div>
+        </div>
+        <nav class="header-actions" aria-label="Instagram actions">
+          <a
+            class="secondary-cta"
+            href="https://www.instagram.com/cakeinthemomentbakery/"
+            target="_blank"
+            rel="noreferrer"
+            aria-label="View cakes from Cake in the Moment Bakery on Instagram"
+          >
+            <svg class="instagram-icon" viewBox="0 0 24 24" aria-hidden="true">
+              <rect x="3" y="3" width="18" height="18" rx="5" fill="none" stroke="currentColor" stroke-width="1.8" />
+              <circle cx="12" cy="12" r="4" fill="none" stroke="currentColor" stroke-width="1.8" />
+              <circle cx="17.4" cy="6.7" r="1.1" fill="currentColor" />
+            </svg>
+            <span class="secondary-copy">
+              <span class="secondary-title">View our cakes</span>
+              <span class="secondary-handle">@cakeinthemomentbakery</span>
+            </span>
+          </a>
+          <a
+            class="primary-cta"
+            href="https://www.instagram.com/cakeinthemomentbakery/"
+            target="_blank"
+            rel="noreferrer"
+            aria-label="Inquire with Cake in the Moment Bakery on Instagram"
+          >
+            <svg class="chat-icon" viewBox="0 0 24 24" aria-hidden="true">
+              <path d="M5.5 4.5h13a2.5 2.5 0 0 1 2.5 2.5v7.5a2.5 2.5 0 0 1-2.5 2.5H11l-4.5 3v-3h-1A2.5 2.5 0 0 1 3 14.5V7a2.5 2.5 0 0 1 2.5-2.5Z" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linejoin="round" />
+              <path d="M8 10.75h.01M12 10.75h.01M16 10.75h.01" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" />
+            </svg>
+            <span class="primary-copy">
+              <span class="primary-title">Let’s make your cake</span>
+              <span class="primary-subtitle">Inquire on Instagram</span>
+            </span>
+          </a>
+        </nav>
+      </header>
+
+      <section class="hero" aria-labelledby="page-title">
+        <div class="scene-decor" aria-hidden="true"></div>
+        <div class="cake-stage" aria-label="Interactive cake artwork from Cake in the Moment">
+          <canvas class="cake-canvas" id="three-canvas" aria-hidden="true" tabindex="-1"></canvas>
+        </div>
+      </section>
+
+      <footer class="site-footer">
+        <svg class="location-icon" viewBox="0 0 24 24" aria-hidden="true">
+          <path d="M12 21s6.5-5.9 6.5-12A6.5 6.5 0 1 0 5.5 9C5.5 15.1 12 21 12 21Z" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linejoin="round" />
+          <circle cx="12" cy="9" r="2.25" fill="none" stroke="currentColor" stroke-width="1.8" />
+        </svg>
+        <span>Handcrafted in Bothell · Serving Greater Seattle Area</span>
+      </footer>
+    </main>
+
+    <script type="text/plain" data-disabled-fallback>
+      // Lightweight placeholder for the future Three.js cake.
+      const canvas = document.querySelector("#cake-canvas");
+      const context = canvas.getContext("2d");
+      const prefersReducedMotion = window.matchMedia("(prefers-reduced-motion: reduce)");
+      let pointerX = 0;
+      let pointerY = 0;
+      let currentX = 0;
+      let currentY = 0;
+      let animationFrame;
+      let fallbackActive = true;
+
+      function resizeCanvas() {
+        const bounds = canvas.getBoundingClientRect();
+        const ratio = Math.min(window.devicePixelRatio || 1, 2);
+        canvas.width = Math.round(bounds.width * ratio);
+        canvas.height = Math.round(bounds.height * ratio);
+        context.setTransform(ratio, 0, 0, ratio, 0, 0);
+      }
+
+      function roundedRect(ctx, x, y, width, height, radius) {
+        const r = Math.min(radius, width / 2, height / 2);
+        ctx.beginPath();
+        ctx.moveTo(x + r, y);
+        ctx.lineTo(x + width - r, y);
+        ctx.arcTo(x + width, y, x + width, y + r, r);
+        ctx.lineTo(x + width, y + height - r);
+        ctx.arcTo(x + width, y + height, x + width - r, y + height, r);
+        ctx.lineTo(x + r, y + height);
+        ctx.arcTo(x, y + height, x, y + height - r, r);
+        ctx.lineTo(x, y + r);
+        ctx.arcTo(x, y, x + r, y, r);
+        ctx.closePath();
+      }
+
+      function drawCake(time = 0) {
+        const width = canvas.getBoundingClientRect().width;
+        const height = canvas.getBoundingClientRect().height;
+        context.clearRect(0, 0, width, height);
+
+        if (!prefersReducedMotion.matches) {
+          currentX += (pointerX - currentX) * 0.045;
+          currentY += (pointerY - currentY) * 0.045;
+        }
+
+        const unit = Math.min(width, height) / 520;
+        const cx = width * 0.52 + currentX * 18;
+        const baseY = height * 0.7 + currentY * 9;
+        const bob = prefersReducedMotion.matches ? 0 : Math.sin(time * 0.0007) * 4;
+
+        context.save();
+        context.translate(cx, baseY + bob);
+        context.rotate(currentX * 0.035);
+
+        const plateGradient = context.createLinearGradient(-190 * unit, 0, 190 * unit, 40 * unit);
+        plateGradient.addColorStop(0, "#fff8f2");
+        plateGradient.addColorStop(0.5, "#ffffff");
+        plateGradient.addColorStop(1, "#e8c5cf");
+        context.fillStyle = "rgba(81, 33, 50, 0.12)";
+        context.beginPath();
+        context.ellipse(0, 34 * unit, 205 * unit, 45 * unit, 0, 0, Math.PI * 2);
+        context.fill();
+        context.fillStyle = plateGradient;
+        context.beginPath();
+        context.ellipse(0, 14 * unit, 190 * unit, 39 * unit, 0, 0, Math.PI * 2);
+        context.fill();
+
+        const cakeWidth = 285 * unit;
+        const cakeHeight = 210 * unit;
+        const cakeX = -cakeWidth / 2;
+        const cakeY = -cakeHeight;
+        const bodyGradient = context.createLinearGradient(cakeX, cakeY, cakeX + cakeWidth, cakeY + cakeHeight);
+        bodyGradient.addColorStop(0, "#fff9f4");
+        bodyGradient.addColorStop(0.52, "#f5cbd6");
+        bodyGradient.addColorStop(1, "#db7594");
+        context.fillStyle = bodyGradient;
+        roundedRect(context, cakeX, cakeY, cakeWidth, cakeHeight, 35 * unit);
+        context.fill();
+
+        context.fillStyle = "rgba(255, 255, 255, 0.55)";
+        context.beginPath();
+        context.ellipse(0, cakeY + 12 * unit, cakeWidth / 2, 48 * unit, 0, 0, Math.PI * 2);
+        context.fill();
+
+        context.strokeStyle = "rgba(206, 76, 117, 0.52)";
+        context.lineWidth = 10 * unit;
+        context.lineCap = "round";
+        for (let row = 0; row < 5; row += 1) {
+          const y = cakeY + 68 * unit + row * 28 * unit;
+          context.beginPath();
+          for (let x = -112 * unit; x <= 112 * unit; x += 8 * unit) {
+            const wave = Math.sin((x / unit) * 0.065 + row * 0.72) * 5 * unit;
+            if (x === -112 * unit) context.moveTo(x, y + wave);
+            else context.lineTo(x, y + wave);
+          }
+          context.stroke();
+        }
+
+        const berries = [
+          [-82, -225, 18],
+          [-28, -244, 20],
+          [31, -237, 17],
+          [84, -217, 19]
+        ];
+        berries.forEach(([x, y, radius], index) => {
+          const berryGradient = context.createRadialGradient(
+            (x - 5) * unit,
+            (y - 7) * unit,
+            2 * unit,
+            x * unit,
+            y * unit,
+            radius * unit
+          );
+          berryGradient.addColorStop(0, "#ffb8c8");
+          berryGradient.addColorStop(0.35, "#dd4b76");
+          berryGradient.addColorStop(1, "#8d2446");
+          context.fillStyle = berryGradient;
+          context.beginPath();
+          context.arc(x * unit, (y + Math.sin(time * 0.001 + index) * 2) * unit, radius * unit, 0, Math.PI * 2);
+          context.fill();
+        });
+
+        context.restore();
+        if (fallbackActive) animationFrame = requestAnimationFrame(drawCake);
+      }
+
+      window.addEventListener("pointermove", (event) => {
+        pointerX = event.clientX / window.innerWidth - 0.5;
+        pointerY = event.clientY / window.innerHeight - 0.5;
+      });
+
+      const canvasResizeObserver = "ResizeObserver" in window
+        ? new ResizeObserver(resizeCanvas)
+        : null;
+
+      canvasResizeObserver?.observe(canvas);
+      window.addEventListener("resize", resizeCanvas);
+      window.addEventListener("pagehide", () => {
+        canvasResizeObserver?.disconnect();
+        cancelAnimationFrame(animationFrame);
+      });
+      window.stopCakeFallback = () => {
+        fallbackActive = false;
+        canvasResizeObserver?.disconnect();
+        cancelAnimationFrame(animationFrame);
+      };
+      resizeCanvas();
+      drawCake();
+    </script>
+    <script type="module">
+      const stage = document.querySelector(".cake-stage");
+      const threeCanvas = document.querySelector("#three-canvas");
+      threeCanvas.classList.add("is-entering");
+
+      import("https://cdn.jsdelivr.net/npm/three@0.186.0/build/three.module.js")
+        .then(async (THREE) => {
+          if (document.fonts?.ready) await document.fonts.ready;
+
+          const renderer = new THREE.WebGLRenderer({
+            canvas: threeCanvas,
+            alpha: true,
+            antialias: true,
+            powerPreference: "high-performance"
+          });
+          renderer.setClearColor(0x000000, 0);
+          renderer.outputColorSpace = THREE.SRGBColorSpace;
+          renderer.toneMapping = THREE.ACESFilmicToneMapping;
+          renderer.toneMappingExposure = 1.02;
+          renderer.shadowMap.enabled = true;
+          renderer.shadowMap.type = THREE.PCFSoftShadowMap;
+
+          const scene = new THREE.Scene();
+          const camera = new THREE.PerspectiveCamera(31, 1, 0.1, 60);
+          const cameraTarget = new THREE.Vector3(0, -0.04, 0);
+          const cameraDirection = new THREE.Vector3(0.38, 0.28, 1).normalize();
+          const presentation = new THREE.Group();
+          scene.add(presentation);
+
+          const textures = new Set();
+          const geometries = new Set();
+          const materials = new Set();
+          const track = (resource, collection) => {
+            collection.add(resource);
+            return resource;
+          };
+
+          function seededRandom(seed) {
+            let value = seed >>> 0;
+            return () => {
+              value += 0x6d2b79f5;
+              let result = value;
+              result = Math.imul(result ^ (result >>> 15), result | 1);
+              result ^= result + Math.imul(result ^ (result >>> 7), result | 61);
+              return ((result ^ (result >>> 14)) >>> 0) / 4294967296;
+            };
+          }
+
+          function makeFrostingTexture() {
+            const textureCanvas = document.createElement("canvas");
+            textureCanvas.width = 256;
+            textureCanvas.height = 256;
+            const textureContext = textureCanvas.getContext("2d");
+            const imageData = textureContext.createImageData(256, 256);
+            const random = seededRandom(1047);
+            for (let index = 0; index < imageData.data.length; index += 4) {
+              const value = Math.round(124 + random() * 8);
+              imageData.data[index] = value;
+              imageData.data[index + 1] = value;
+              imageData.data[index + 2] = value;
+              imageData.data[index + 3] = 255;
+            }
+            textureContext.putImageData(imageData, 0, 0);
+            const texture = track(new THREE.CanvasTexture(textureCanvas), textures);
+            texture.wrapS = THREE.RepeatWrapping;
+            texture.wrapT = THREE.RepeatWrapping;
+            texture.repeat.set(4, 3);
+            return texture;
+          }
+
+          function roundedTierGeometry(radius, height, edgeRadius) {
+            const half = height / 2;
+            const profile = [
+              new THREE.Vector2(0, -half),
+              new THREE.Vector2(radius - edgeRadius * 1.15, -half),
+              new THREE.Vector2(radius - edgeRadius * 0.35, -half + edgeRadius * 0.24),
+              new THREE.Vector2(radius, -half + edgeRadius * 0.74),
+              new THREE.Vector2(radius, half - edgeRadius * 0.9),
+              new THREE.Vector2(radius - edgeRadius * 0.25, half - edgeRadius * 0.28),
+              new THREE.Vector2(radius - edgeRadius, half),
+              new THREE.Vector2(0, half)
+            ];
+            const geometry = track(new THREE.LatheGeometry(profile, 72), geometries);
+            geometry.computeVertexNormals();
+            return geometry;
+          }
+
+          const frostingTexture = makeFrostingTexture();
+          const lavenderMaterial = track(new THREE.MeshPhysicalMaterial({
+            color: 0xe4bdcd,
+            roughness: 0.96,
+            metalness: 0,
+            clearcoat: 0,
+            bumpMap: frostingTexture,
+            bumpScale: 0.008
+          }), materials);
+          const upperLavenderMaterial = track(new THREE.MeshPhysicalMaterial({
+            color: 0xedd2dd,
+            roughness: 0.95,
+            metalness: 0,
+            clearcoat: 0,
+            bumpMap: frostingTexture,
+            bumpScale: 0.007
+          }), materials);
+          const whiteMaterial = track(new THREE.MeshPhysicalMaterial({
+            color: 0xfffbf8,
+            roughness: 0.82,
+            metalness: 0,
+            clearcoat: 0.02
+          }), materials);
+          const goldMaterial = track(new THREE.MeshPhysicalMaterial({
+            color: 0xd7b979,
+            roughness: 0.46,
+            metalness: 0.38
+          }), materials);
+          const silverMaterial = track(new THREE.MeshPhysicalMaterial({
+            color: 0xd7c4cc,
+            roughness: 0.48,
+            metalness: 0.34
+          }), materials);
+          const pearlMaterial = track(new THREE.MeshPhysicalMaterial({
+            color: 0xfff8e8,
+            roughness: 0.38,
+            metalness: 0.06,
+            clearcoat: 0.34
+          }), materials);
+          const whitePearlMaterial = track(new THREE.MeshPhysicalMaterial({
+            color: 0xffffff,
+            roughness: 0.4,
+            metalness: 0.03,
+            clearcoat: 0.3
+          }), materials);
+
+          const standBottomGeometry = track(new THREE.CylinderGeometry(2.5, 2.62, 0.22, 72), geometries);
+          const standTopGeometry = track(new THREE.CylinderGeometry(2.72, 2.72, 0.18, 72), geometries);
+          const standBottom = new THREE.Mesh(standBottomGeometry, whiteMaterial);
+          standBottom.position.y = -2.22;
+          standBottom.castShadow = true;
+          standBottom.receiveShadow = true;
+          const standTop = new THREE.Mesh(standTopGeometry, whiteMaterial);
+          standTop.position.y = -2.03;
+          standTop.castShadow = true;
+          standTop.receiveShadow = true;
+          presentation.add(standBottom, standTop);
+
+          const lowerTier = new THREE.Mesh(roundedTierGeometry(2.12, 2.05, 0.15), lavenderMaterial);
+          lowerTier.position.y = -0.915;
+          lowerTier.castShadow = true;
+          lowerTier.receiveShadow = true;
+          const upperTier = new THREE.Mesh(roundedTierGeometry(1.43, 1.78, 0.13), upperLavenderMaterial);
+          upperTier.position.y = 1.01;
+          upperTier.castShadow = true;
+          upperTier.receiveShadow = true;
+          presentation.add(lowerTier, upperTier);
+
+          const edgeGeometryLarge = track(new THREE.TorusGeometry(2.03, 0.045, 8, 72), geometries);
+          const edgeGeometrySmall = track(new THREE.TorusGeometry(1.36, 0.04, 8, 72), geometries);
+          const lowerEdge = new THREE.Mesh(edgeGeometryLarge, upperLavenderMaterial);
+          lowerEdge.rotation.x = Math.PI / 2;
+          lowerEdge.position.y = 0.08;
+          const upperEdge = new THREE.Mesh(edgeGeometrySmall, pearlMaterial);
+          upperEdge.rotation.x = Math.PI / 2;
+          upperEdge.position.y = 1.87;
+          presentation.add(lowerEdge, upperEdge);
+
+          const pipingMaterial = track(new THREE.MeshStandardMaterial({
+            color: 0xf6dfe8,
+            roughness: 0.98,
+            metalness: 0
+          }), materials);
+          const ribbonMaterial = track(new THREE.MeshStandardMaterial({
+            color: 0xc985a2,
+            roughness: 0.82,
+            metalness: 0
+          }), materials);
+
+          const lowerRibbonGeometry = track(new THREE.TorusGeometry(2.04, 0.035, 8, 72), geometries);
+          const upperRibbonGeometry = track(new THREE.TorusGeometry(1.36, 0.03, 8, 64), geometries);
+          const lowerRibbon = new THREE.Mesh(lowerRibbonGeometry, ribbonMaterial);
+          lowerRibbon.rotation.x = Math.PI / 2;
+          lowerRibbon.position.y = -1.89;
+          const upperRibbon = new THREE.Mesh(upperRibbonGeometry, ribbonMaterial);
+          upperRibbon.rotation.x = Math.PI / 2;
+          upperRibbon.position.y = 0.16;
+          presentation.add(lowerRibbon, upperRibbon);
+
+          function addPipedSwags(radius, topY, sagY, count, phase = 0) {
+            for (let segment = 0; segment < count; segment += 1) {
+              const start = phase + segment / count * Math.PI * 2;
+              const end = phase + (segment + 1) / count * Math.PI * 2;
+              const points = [];
+              for (let pointIndex = 0; pointIndex < 5; pointIndex += 1) {
+                const progress = pointIndex / 4;
+                const angle = THREE.MathUtils.lerp(start, end, progress);
+                const y = topY + Math.sin(progress * Math.PI) * (sagY - topY);
+                points.push(new THREE.Vector3(
+                  Math.sin(angle) * radius,
+                  y,
+                  Math.cos(angle) * radius
+                ));
+              }
+              const curve = new THREE.CatmullRomCurve3(points, false, "centripetal");
+              const swagGeometry = track(new THREE.TubeGeometry(curve, 14, 0.022, 6, false), geometries);
+              const swag = new THREE.Mesh(swagGeometry, pipingMaterial);
+              swag.castShadow = true;
+              presentation.add(swag);
+            }
+          }
+
+          addPipedSwags(2.14, -0.36, -0.68, 8, Math.PI / 8);
+          addPipedSwags(1.45, 1.18, 0.97, 6, Math.PI / 6);
+
+          function makeShadowTexture() {
+            const shadowCanvas = document.createElement("canvas");
+            shadowCanvas.width = 256;
+            shadowCanvas.height = 256;
+            const shadowContext = shadowCanvas.getContext("2d");
+            const gradient = shadowContext.createRadialGradient(128, 128, 8, 128, 128, 126);
+            gradient.addColorStop(0, "rgba(78, 42, 60, 0.3)");
+            gradient.addColorStop(0.48, "rgba(78, 42, 60, 0.14)");
+            gradient.addColorStop(1, "rgba(78, 42, 60, 0)");
+            shadowContext.fillStyle = gradient;
+            shadowContext.fillRect(0, 0, 256, 256);
+            return track(new THREE.CanvasTexture(shadowCanvas), textures);
+          }
+
+          const shadowMaterial = track(new THREE.MeshBasicMaterial({
+            map: makeShadowTexture(),
+            transparent: true,
+            depthWrite: false,
+            opacity: 0.7
+          }), materials);
+          const shadowGeometry = track(new THREE.PlaneGeometry(6.4, 4.3), geometries);
+          const contactShadow = new THREE.Mesh(shadowGeometry, shadowMaterial);
+          contactShadow.rotation.x = -Math.PI / 2;
+          contactShadow.position.set(0.1, -2.36, 0.15);
+          scene.add(contactShadow);
+
+          const pearlGeometry = track(new THREE.SphereGeometry(1, 10, 8), geometries);
+          const pearlSets = [];
+
+          function addPipedBeadRing(radius, y, count, size, phase = 0) {
+            const mesh = new THREE.InstancedMesh(pearlGeometry, pipingMaterial, count);
+            const dummy = new THREE.Object3D();
+            for (let index = 0; index < count; index += 1) {
+              const angle = phase + index / count * Math.PI * 2;
+              dummy.position.set(Math.sin(angle) * radius, y, Math.cos(angle) * radius);
+              dummy.scale.setScalar(size * (index % 2 === 0 ? 1 : 0.88));
+              dummy.updateMatrix();
+              mesh.setMatrixAt(index, dummy.matrix);
+            }
+            mesh.instanceMatrix.needsUpdate = true;
+            mesh.castShadow = true;
+            mesh.frustumCulled = false;
+            presentation.add(mesh);
+          }
+
+          addPipedBeadRing(2.02, 0.1, 46, 0.05, 0.02);
+          addPipedBeadRing(2.04, -1.88, 50, 0.043, 0.05);
+          addPipedBeadRing(1.34, 1.9, 34, 0.047, 0.03);
+          addPipedBeadRing(1.36, 0.16, 38, 0.04, 0.06);
+          addPipedBeadRing(2.15, -0.36, 8, 0.075, Math.PI / 8);
+          addPipedBeadRing(1.46, 1.18, 6, 0.066, Math.PI / 6);
+
+          const tierData = [
+            { radius: 2.12, bottom: -1.94, top: 0.11 },
+            { radius: 1.43, bottom: 0.12, top: 1.9 }
+          ];
+
+          function buildPearlSet(material, count, seed, baseSize) {
+            const mesh = new THREE.InstancedMesh(pearlGeometry, material, count);
+            const random = seededRandom(seed);
+            const dummy = new THREE.Object3D();
+            for (let index = 0; index < count; index += 1) {
+              const tier = random() < 0.6 ? tierData[0] : tierData[1];
+              const size = baseSize * (0.72 + random() * 0.7);
+              if (random() < 0.62) {
+                const angle = random() * Math.PI * 2;
+                const radius = Math.sqrt(random()) * tier.radius * 0.92;
+                dummy.position.set(
+                  Math.sin(angle) * radius,
+                  tier.top + size * 0.58,
+                  Math.cos(angle) * radius
+                );
+              } else {
+                const angle = random() * Math.PI * 2;
+                const yBias = Math.pow(random(), 1.85);
+                dummy.position.set(
+                  Math.sin(angle) * (tier.radius + size * 0.58),
+                  tier.top - 0.08 - yBias * (tier.top - tier.bottom) * 0.88,
+                  Math.cos(angle) * (tier.radius + size * 0.58)
+                );
+              }
+              dummy.scale.setScalar(size);
+              dummy.updateMatrix();
+              mesh.setMatrixAt(index, dummy.matrix);
+            }
+            mesh.instanceMatrix.needsUpdate = true;
+            mesh.instanceMatrix.setUsage(THREE.StaticDrawUsage);
+            mesh.castShadow = true;
+            mesh.frustumCulled = false;
+            mesh.userData.fullCount = count;
+            mesh.userData.compactCount = Math.max(5, Math.round(count * 0.62));
+            pearlSets.push(mesh);
+            presentation.add(mesh);
+          }
+
+          function buildSidePearlSet(material, count, seed, baseSize) {
+            const mesh = new THREE.InstancedMesh(pearlGeometry, material, count);
+            const random = seededRandom(seed);
+            const dummy = new THREE.Object3D();
+            for (let index = 0; index < count; index += 1) {
+              const tier = random() < 0.58 ? tierData[0] : tierData[1];
+              const size = baseSize * (0.68 + random() * 0.76);
+              const angle = random() * Math.PI * 2;
+              const yBias = Math.pow(random(), 2.7);
+              dummy.position.set(
+                Math.sin(angle) * (tier.radius + size * 0.58),
+                tier.top - 0.07 - yBias * (tier.top - tier.bottom) * 0.9,
+                Math.cos(angle) * (tier.radius + size * 0.58)
+              );
+              dummy.scale.setScalar(size);
+              dummy.updateMatrix();
+              mesh.setMatrixAt(index, dummy.matrix);
+            }
+            mesh.instanceMatrix.needsUpdate = true;
+            mesh.instanceMatrix.setUsage(THREE.StaticDrawUsage);
+            mesh.castShadow = true;
+            mesh.frustumCulled = false;
+            mesh.userData.fullCount = count;
+            mesh.userData.compactCount = Math.max(5, Math.round(count * 0.58));
+            pearlSets.push(mesh);
+            presentation.add(mesh);
+          }
+
+          buildPearlSet(whitePearlMaterial, 160, 8101, 0.042);
+          buildPearlSet(pearlMaterial, 82, 2441, 0.061);
+          buildPearlSet(goldMaterial, 55, 9929, 0.05);
+          buildPearlSet(silverMaterial, 36, 5179, 0.055);
+          buildPearlSet(whitePearlMaterial, 240, 6317, 0.022);
+          buildPearlSet(goldMaterial, 75, 3871, 0.02);
+          buildSidePearlSet(whitePearlMaterial, 180, 7351, 0.024);
+          buildSidePearlSet(goldMaterial, 65, 8521, 0.023);
+          buildSidePearlSet(silverMaterial, 45, 4679, 0.027);
+
+          function makeDiscoTexture() {
+            const discoCanvas = document.createElement("canvas");
+            discoCanvas.width = 512;
+            discoCanvas.height = 256;
+            const discoContext = discoCanvas.getContext("2d");
+            const palette = ["#fffaf7", "#f3dce7", "#d7a8bc", "#f2dfbb", "#f9eef4", "#b97996"];
+            const random = seededRandom(3719);
+            const columns = 28;
+            const rows = 14;
+            const cellWidth = discoCanvas.width / columns;
+            const cellHeight = discoCanvas.height / rows;
+            discoContext.fillStyle = "#dbc5cf";
+            discoContext.fillRect(0, 0, discoCanvas.width, discoCanvas.height);
+            for (let row = 0; row < rows; row += 1) {
+              for (let column = 0; column < columns; column += 1) {
+                const inset = 1.25;
+                discoContext.fillStyle = palette[Math.floor(random() * palette.length)];
+                discoContext.fillRect(
+                  column * cellWidth + inset,
+                  row * cellHeight + inset,
+                  cellWidth - inset * 2,
+                  cellHeight - inset * 2
+                );
+              }
+            }
+            const texture = track(new THREE.CanvasTexture(discoCanvas), textures);
+            texture.colorSpace = THREE.SRGBColorSpace;
+            texture.wrapS = THREE.RepeatWrapping;
+            texture.repeat.set(1.35, 1);
+            return texture;
+          }
+
+          function makeDiscoBumpTexture() {
+            const bumpCanvas = document.createElement("canvas");
+            bumpCanvas.width = 512;
+            bumpCanvas.height = 256;
+            const bumpContext = bumpCanvas.getContext("2d");
+            const random = seededRandom(8921);
+            const columns = 28;
+            const rows = 14;
+            const cellWidth = bumpCanvas.width / columns;
+            const cellHeight = bumpCanvas.height / rows;
+            bumpContext.fillStyle = "#474747";
+            bumpContext.fillRect(0, 0, bumpCanvas.width, bumpCanvas.height);
+            for (let row = 0; row < rows; row += 1) {
+              for (let column = 0; column < columns; column += 1) {
+                const x = column * cellWidth;
+                const y = row * cellHeight;
+                const angle = random() * Math.PI * 2;
+                const centerX = x + cellWidth / 2;
+                const centerY = y + cellHeight / 2;
+                const gradient = bumpContext.createLinearGradient(
+                  centerX - Math.cos(angle) * cellWidth * 0.48,
+                  centerY - Math.sin(angle) * cellHeight * 0.48,
+                  centerX + Math.cos(angle) * cellWidth * 0.48,
+                  centerY + Math.sin(angle) * cellHeight * 0.48
+                );
+                const low = Math.round(92 + random() * 24);
+                const high = Math.round(196 + random() * 42);
+                gradient.addColorStop(0, `rgb(${low}, ${low}, ${low})`);
+                gradient.addColorStop(1, `rgb(${high}, ${high}, ${high})`);
+                bumpContext.fillStyle = gradient;
+                bumpContext.fillRect(x + 1.3, y + 1.3, cellWidth - 2.6, cellHeight - 2.6);
+              }
+            }
+            const texture = track(new THREE.CanvasTexture(bumpCanvas), textures);
+            texture.wrapS = THREE.RepeatWrapping;
+            texture.repeat.set(1.35, 1);
+            return texture;
+          }
+
+          function makeStudioReflectionTexture() {
+            const reflectionCanvas = document.createElement("canvas");
+            reflectionCanvas.width = 512;
+            reflectionCanvas.height = 256;
+            const reflectionContext = reflectionCanvas.getContext("2d");
+            const base = reflectionContext.createLinearGradient(0, 0, 0, 256);
+            base.addColorStop(0, "#cbbcc4");
+            base.addColorStop(0.34, "#fffaf6");
+            base.addColorStop(0.68, "#ead9e1");
+            base.addColorStop(1, "#806d77");
+            reflectionContext.fillStyle = base;
+            reflectionContext.fillRect(0, 0, 512, 256);
+
+            const keyPanel = reflectionContext.createRadialGradient(122, 72, 4, 122, 72, 92);
+            keyPanel.addColorStop(0, "rgba(255, 255, 255, 1)");
+            keyPanel.addColorStop(0.42, "rgba(255, 247, 218, 0.76)");
+            keyPanel.addColorStop(1, "rgba(255, 247, 218, 0)");
+            reflectionContext.fillStyle = keyPanel;
+            reflectionContext.fillRect(0, 0, 230, 180);
+
+            const fillPanel = reflectionContext.createRadialGradient(390, 106, 8, 390, 106, 86);
+            fillPanel.addColorStop(0, "rgba(255, 244, 250, 0.9)");
+            fillPanel.addColorStop(1, "rgba(255, 244, 250, 0)");
+            reflectionContext.fillStyle = fillPanel;
+            reflectionContext.fillRect(290, 18, 205, 190);
+
+            const texture = track(new THREE.CanvasTexture(reflectionCanvas), textures);
+            texture.mapping = THREE.EquirectangularReflectionMapping;
+            texture.colorSpace = THREE.SRGBColorSpace;
+            return texture;
+          }
+
+          const discoMaterial = track(new THREE.MeshPhysicalMaterial({
+            color: 0xffffff,
+            map: makeDiscoTexture(),
+            bumpMap: makeDiscoBumpTexture(),
+            bumpScale: 0.075,
+            envMap: makeStudioReflectionTexture(),
+            envMapIntensity: 1.15,
+            roughness: 0.27,
+            metalness: 0.68,
+            clearcoat: 0.16
+          }), materials);
+          const discoGeometry = track(new THREE.SphereGeometry(1, 32, 20), geometries);
+
+          function makeDiscoSparkleTexture() {
+            const sparkleCanvas = document.createElement("canvas");
+            sparkleCanvas.width = 128;
+            sparkleCanvas.height = 128;
+            const sparkleContext = sparkleCanvas.getContext("2d");
+            const glow = sparkleContext.createRadialGradient(64, 64, 0, 64, 64, 34);
+            glow.addColorStop(0, "rgba(255, 255, 250, 1)");
+            glow.addColorStop(0.25, "rgba(255, 244, 208, 0.74)");
+            glow.addColorStop(1, "rgba(255, 244, 208, 0)");
+            sparkleContext.fillStyle = glow;
+            sparkleContext.fillRect(24, 24, 80, 80);
+            sparkleContext.strokeStyle = "rgba(255, 255, 248, 0.98)";
+            sparkleContext.lineCap = "round";
+            sparkleContext.lineWidth = 7;
+            sparkleContext.beginPath();
+            sparkleContext.moveTo(18, 64);
+            sparkleContext.lineTo(110, 64);
+            sparkleContext.moveTo(64, 18);
+            sparkleContext.lineTo(64, 110);
+            sparkleContext.stroke();
+            const texture = track(new THREE.CanvasTexture(sparkleCanvas), textures);
+            texture.colorSpace = THREE.SRGBColorSpace;
+            return texture;
+          }
+
+          const discoSparkleTexture = makeDiscoSparkleTexture();
+
+          function addDiscoBall(position, radius, sparklePhase) {
+            const ball = new THREE.Mesh(discoGeometry, discoMaterial);
+            ball.position.set(...position);
+            ball.scale.setScalar(radius);
+            ball.rotation.set(0.08, sparklePhase * 0.18, 0.025);
+            ball.castShadow = true;
+            presentation.add(ball);
+            return ball;
+          }
+
+          const largeDisco = addDiscoBall([1.95, -1.36, 1.15], 0.58, 0.35);
+          addDiscoBall([-1.54, 0.61, 0.78], 0.5, 2.1);
+          addDiscoBall([-1.08, 0.39, 1.4], 0.28, 4.05);
+          const tinyDisco = addDiscoBall([1.92, -1.74, 1.18], 0.2, 5.6);
+
+          function addFrostingCradle(position, ringRadius, dollopCount) {
+            const cradle = new THREE.Group();
+            cradle.position.set(...position);
+            const ringGeometry = track(new THREE.TorusGeometry(ringRadius, 0.055, 8, 36), geometries);
+            const ring = new THREE.Mesh(ringGeometry, pipingMaterial);
+            ring.rotation.x = Math.PI / 2;
+            ring.castShadow = true;
+            cradle.add(ring);
+
+            const dollops = new THREE.InstancedMesh(pearlGeometry, pipingMaterial, dollopCount);
+            const dummy = new THREE.Object3D();
+            for (let index = 0; index < dollopCount; index += 1) {
+              const angle = index / dollopCount * Math.PI * 2;
+              dummy.position.set(
+                Math.sin(angle) * ringRadius,
+                0.035 + (index % 2) * 0.012,
+                Math.cos(angle) * ringRadius
+              );
+              dummy.scale.set(0.078, 0.105, 0.078);
+              dummy.updateMatrix();
+              dollops.setMatrixAt(index, dummy.matrix);
+            }
+            dollops.instanceMatrix.needsUpdate = true;
+            dollops.castShadow = true;
+            dollops.frustumCulled = false;
+            cradle.add(dollops);
+
+            const cradlePearls = new THREE.InstancedMesh(pearlGeometry, whitePearlMaterial, dollopCount);
+            for (let index = 0; index < dollopCount; index += 1) {
+              const angle = (index + 0.5) / dollopCount * Math.PI * 2;
+              const size = index % 3 === 0 ? 0.06 : 0.043;
+              dummy.position.set(
+                Math.sin(angle) * ringRadius * 1.23,
+                0.055 + (index % 2) * 0.018,
+                Math.cos(angle) * ringRadius * 1.23
+              );
+              dummy.scale.setScalar(size);
+              dummy.updateMatrix();
+              cradlePearls.setMatrixAt(index, dummy.matrix);
+            }
+            cradlePearls.instanceMatrix.needsUpdate = true;
+            cradlePearls.castShadow = true;
+            cradlePearls.frustumCulled = false;
+            cradle.add(cradlePearls);
+            presentation.add(cradle);
+            return cradle;
+          }
+
+          addFrostingCradle([-1.54, 0.155, 0.78], 0.27, 9);
+          const largeDiscoCradle = addFrostingCradle([1.95, -1.9, 1.15], 0.31, 10);
+
+          const cakeSparkles = [];
+          const cakeSparkleSpecs = [
+            [-0.82, 1.37, 1.2, 0.12, 0.2],
+            [0.24, 1.27, 1.41, 0.1, 1.35],
+            [0.93, 0.73, 1.08, 0.11, 2.7],
+            [-0.28, 0.49, 1.44, 0.08, 4.1],
+            [-0.48, 1.96, 0.34, 0.1, 5.4],
+            [0.64, 1.96, 0.18, 0.09, 6.6],
+            [-1.4, -0.54, 1.62, 0.12, 0.75],
+            [-0.72, -1.18, 2.01, 0.1, 2.05],
+            [0.02, -0.4, 2.14, 0.09, 3.45],
+            [0.76, -1.27, 1.98, 0.12, 4.8],
+            [1.42, -0.68, 1.62, 0.1, 6.05],
+            [-1.56, 0.18, 0.76, 0.09, 1.1],
+            [1.58, 0.18, 0.72, 0.1, 2.85],
+            [0.46, -1.76, 1.31, 0.08, 5.15]
+          ];
+
+          cakeSparkleSpecs.forEach(([x, y, z, size], index) => {
+            const sparkleMaterial = track(new THREE.SpriteMaterial({
+              map: discoSparkleTexture,
+              color: index % 3 === 0 ? 0xffe8b3 : 0xfffff2,
+              transparent: true,
+              opacity: 0.35,
+              depthWrite: false,
+              blending: THREE.AdditiveBlending
+            }), materials);
+            const sparkle = new THREE.Sprite(sparkleMaterial);
+            sparkle.position.set(x, y, z);
+            sparkle.scale.set(size, size, 1);
+            presentation.add(sparkle);
+            const topFacing = y > 1.9 || (y > 0.08 && y < 0.26);
+            const normal = topFacing
+              ? new THREE.Vector3(0, 1, 0)
+              : new THREE.Vector3(x, 0, z).normalize();
+            cakeSparkles.push({ sparkle, material: sparkleMaterial, normal });
+          });
+
+          function starGeometry() {
+            const shape = new THREE.Shape();
+            const points = 10;
+            for (let index = 0; index < points; index += 1) {
+              const angle = -Math.PI / 2 + index * Math.PI / 5;
+              const radius = index % 2 === 0 ? 1 : 0.44;
+              const x = Math.cos(angle) * radius;
+              const y = Math.sin(angle) * radius;
+              if (index === 0) shape.moveTo(x, y);
+              else shape.lineTo(x, y);
+            }
+            shape.closePath();
+            const geometry = track(new THREE.ExtrudeGeometry(shape, {
+              depth: 0.12,
+              bevelEnabled: true,
+              bevelSegments: 2,
+              steps: 1,
+              bevelSize: 0.045,
+              bevelThickness: 0.035
+            }), geometries);
+            geometry.center();
+            return geometry;
+          }
+
+          const sharedStarGeometry = starGeometry();
+          const stars = [];
+          const starSparkles = [];
+          function addStar(position, scale, material, rotation) {
+            const star = new THREE.Mesh(sharedStarGeometry, material);
+            star.position.set(...position);
+            star.scale.setScalar(scale);
+            star.rotation.set(0.05, rotation, rotation * 0.32);
+            star.castShadow = true;
+
+            const sparkleCount = scale >= 0.3 ? 2 : 1;
+            const sparklePositions = [
+              [0.12, 0.16, 0.2],
+              [-0.3, -0.08, 0.18]
+            ];
+            for (let index = 0; index < sparkleCount; index += 1) {
+              const sparkleMaterial = track(new THREE.SpriteMaterial({
+                map: discoSparkleTexture,
+                color: 0xfff1bd,
+                transparent: true,
+                opacity: 0.5,
+                depthWrite: false,
+                blending: THREE.AdditiveBlending
+              }), materials);
+              const sparkle = new THREE.Sprite(sparkleMaterial);
+              sparkle.position.set(...sparklePositions[index]);
+              const sparkleSize = index === 0 ? 0.52 : 0.38;
+              sparkle.scale.set(sparkleSize, sparkleSize, 1);
+              star.add(sparkle);
+              starSparkles.push({
+                sparkle,
+                star,
+                material: sparkleMaterial,
+                normal: new THREE.Vector3(0, 0, 1)
+              });
+            }
+            stars.push(star);
+            presentation.add(star);
+            return star;
+          }
+
+          addStar([-1.12, 2.36, 0.74], 0.34, goldMaterial, 0.18);
+          addStar([1.68, -1.13, 1.35], 0.4, silverMaterial, -0.24);
+          addStar([0.82, 1.54, 0.92], 0.24, pearlMaterial, 0.08);
+          const optionalStar = addStar([2.03, -1.72, 0.73], 0.22, goldMaterial, 0.42);
+          addStar([0.72, 1.01, 1.25], 0.17, goldMaterial, -0.08);
+          addStar([-0.92, -0.96, 1.92], 0.19, silverMaterial, 0.28);
+          addStar([1.58, 0.55, 0.55], 0.19, silverMaterial, -0.18);
+
+          const decorationSupportMaterial = track(new THREE.MeshStandardMaterial({
+            color: 0xc9a66b,
+            roughness: 0.72,
+            metalness: 0.08
+          }), materials);
+          const starSupportGeometry = track(new THREE.CylinderGeometry(0.018, 0.018, 0.48, 10), geometries);
+          const starSupport = new THREE.Mesh(starSupportGeometry, decorationSupportMaterial);
+          starSupport.position.set(-1.12, 2.1, 0.74);
+          const ledgeStarSupportGeometry = track(new THREE.CylinderGeometry(0.014, 0.014, 0.3, 10), geometries);
+          const ledgeStarSupport = new THREE.Mesh(ledgeStarSupportGeometry, decorationSupportMaterial);
+          ledgeStarSupport.position.set(1.58, 0.26, 0.55);
+          presentation.add(starSupport, ledgeStarSupport);
+
+          function createTopperTexture() {
+            const topperCanvas = document.createElement("canvas");
+            topperCanvas.width = 1024;
+            topperCanvas.height = 700;
+            const topperContext = topperCanvas.getContext("2d");
+            topperContext.clearRect(0, 0, topperCanvas.width, topperCanvas.height);
+            topperContext.textAlign = "center";
+            topperContext.textBaseline = "middle";
+            topperContext.lineJoin = "round";
+            topperContext.lineCap = "round";
+            topperContext.strokeStyle = "rgba(126, 91, 45, 0.7)";
+            topperContext.lineWidth = 4;
+            topperContext.shadowColor = "rgba(255, 246, 216, 0.7)";
+            topperContext.shadowBlur = 9;
+            const goldGradient = topperContext.createLinearGradient(130, 0, 894, 0);
+            goldGradient.addColorStop(0, "#a98243");
+            goldGradient.addColorStop(0.32, "#f7e8b8");
+            goldGradient.addColorStop(0.54, "#c59d55");
+            goldGradient.addColorStop(0.78, "#fff2c5");
+            goldGradient.addColorStop(1, "#9d763a");
+            topperContext.fillStyle = goldGradient;
+
+            topperContext.save();
+            topperContext.strokeStyle = goldGradient;
+            topperContext.lineWidth = 11;
+            topperContext.beginPath();
+            topperContext.moveTo(300, 646);
+            topperContext.bezierCurveTo(278, 560, 314, 470, 302, 378);
+            topperContext.bezierCurveTo(292, 300, 324, 220, 318, 142);
+            topperContext.moveTo(724, 646);
+            topperContext.bezierCurveTo(746, 560, 710, 470, 722, 378);
+            topperContext.bezierCurveTo(732, 300, 700, 220, 706, 142);
+            topperContext.stroke();
+            topperContext.restore();
+
+            const lines = [
+              { text: "Cake in the", y: 174, size: 172 },
+              { text: "Moment", y: 350, size: 224 },
+              { text: "Bakery", y: 544, size: 206 }
+            ];
+            lines.forEach(({ text, y, size }) => {
+              topperContext.font = `400 ${size}px Allura, cursive`;
+              topperContext.strokeText(text, 512, y, 830);
+              topperContext.fillText(text, 512, y, 830);
+            });
+
+            topperContext.save();
+            topperContext.strokeStyle = goldGradient;
+            topperContext.lineWidth = 8;
+            topperContext.beginPath();
+            topperContext.moveTo(292, 628);
+            topperContext.bezierCurveTo(420, 670, 605, 666, 734, 616);
+            topperContext.stroke();
+            topperContext.restore();
+
+            const glitterRandom = seededRandom(7311);
+            topperContext.save();
+            topperContext.globalCompositeOperation = "source-atop";
+            for (let index = 0; index < 220; index += 1) {
+              const x = 255 + glitterRandom() * 514;
+              const y = 110 + glitterRandom() * 540;
+              const radius = 1.4 + glitterRandom() * 3.6;
+              topperContext.fillStyle = glitterRandom() > 0.42
+                ? `rgba(255, 250, 222, ${0.46 + glitterRandom() * 0.5})`
+                : `rgba(180, 126, 54, ${0.32 + glitterRandom() * 0.46})`;
+              topperContext.beginPath();
+              topperContext.arc(x, y, radius, 0, Math.PI * 2);
+              topperContext.fill();
+            }
+
+            const glints = [
+              [395, 150, 17],
+              [626, 194, 13],
+              [515, 335, 18],
+              [411, 405, 12],
+              [649, 468, 16],
+              [514, 558, 15]
+            ];
+            topperContext.strokeStyle = "rgba(255, 255, 244, 0.92)";
+            topperContext.lineWidth = 5;
+            glints.forEach(([x, y, size]) => {
+              topperContext.beginPath();
+              topperContext.moveTo(x - size, y);
+              topperContext.lineTo(x + size, y);
+              topperContext.moveTo(x, y - size);
+              topperContext.lineTo(x, y + size);
+              topperContext.stroke();
+            });
+            topperContext.restore();
+            const texture = track(new THREE.CanvasTexture(topperCanvas), textures);
+            texture.colorSpace = THREE.SRGBColorSpace;
+            texture.anisotropy = Math.min(renderer.capabilities.getMaxAnisotropy(), 8);
+            return texture;
+          }
+
+          const topperTexture = createTopperTexture();
+          function createTopperSparkleTexture() {
+            const sparkleCanvas = document.createElement("canvas");
+            sparkleCanvas.width = 1024;
+            sparkleCanvas.height = 700;
+            const sparkleContext = sparkleCanvas.getContext("2d");
+            const sparklePoints = [
+              [392, 150, 20],
+              [626, 194, 15],
+              [514, 336, 22],
+              [412, 405, 15],
+              [648, 468, 19],
+              [516, 558, 18]
+            ];
+            sparkleContext.strokeStyle = "rgba(255, 255, 238, 0.96)";
+            sparkleContext.lineCap = "round";
+            sparklePoints.forEach(([x, y, size], index) => {
+              const glow = sparkleContext.createRadialGradient(x, y, 0, x, y, size * 0.72);
+              glow.addColorStop(0, "rgba(255, 255, 242, 0.95)");
+              glow.addColorStop(0.25, "rgba(255, 238, 178, 0.55)");
+              glow.addColorStop(1, "rgba(255, 238, 178, 0)");
+              sparkleContext.fillStyle = glow;
+              sparkleContext.beginPath();
+              sparkleContext.arc(x, y, size * 0.72, 0, Math.PI * 2);
+              sparkleContext.fill();
+              sparkleContext.lineWidth = index % 2 === 0 ? 5 : 4;
+              sparkleContext.beginPath();
+              sparkleContext.moveTo(x - size, y);
+              sparkleContext.lineTo(x + size, y);
+              sparkleContext.moveTo(x, y - size);
+              sparkleContext.lineTo(x, y + size);
+              sparkleContext.stroke();
+            });
+            const texture = track(new THREE.CanvasTexture(sparkleCanvas), textures);
+            texture.colorSpace = THREE.SRGBColorSpace;
+            return texture;
+          }
+
+          const topperFrontMaterial = track(new THREE.MeshBasicMaterial({
+            map: topperTexture,
+            transparent: true,
+            alphaTest: 0.06,
+            side: THREE.DoubleSide,
+            toneMapped: false
+          }), materials);
+          const topperSparkleMaterial = track(new THREE.MeshBasicMaterial({
+            map: createTopperSparkleTexture(),
+            transparent: true,
+            opacity: 0.5,
+            depthWrite: false,
+            blending: THREE.AdditiveBlending,
+            toneMapped: false
+          }), materials);
+          const topperBackMaterial = track(new THREE.MeshBasicMaterial({
+            map: topperTexture,
+            color: 0x8e6e38,
+            transparent: true,
+            alphaTest: 0.06,
+            side: THREE.DoubleSide,
+            toneMapped: false
+          }), materials);
+          const topperPlaneGeometry = track(new THREE.PlaneGeometry(2.3, 1.58), geometries);
+          const topperBack = new THREE.Mesh(topperPlaneGeometry, topperBackMaterial);
+          topperBack.position.set(-0.175, 2.6, 0.3);
+          const topperFront = new THREE.Mesh(topperPlaneGeometry, topperFrontMaterial);
+          topperFront.position.set(-0.15, 2.62, 0.34);
+          const topperSparkles = new THREE.Mesh(topperPlaneGeometry, topperSparkleMaterial);
+          topperSparkles.position.set(-0.15, 2.62, 0.37);
+          const supportGeometry = track(new THREE.CylinderGeometry(0.022, 0.022, 0.28, 12), geometries);
+          const supportLeft = new THREE.Mesh(supportGeometry, goldMaterial);
+          supportLeft.position.set(-0.63, 2.02, 0.29);
+          const supportRight = new THREE.Mesh(supportGeometry, goldMaterial);
+          supportRight.position.set(0.33, 2.02, 0.29);
+          presentation.add(supportLeft, supportRight, topperBack, topperFront, topperSparkles);
+
+          const hemisphere = new THREE.HemisphereLight(0xfff9f2, 0xb996a4, 2.15);
+          const keyLight = new THREE.DirectionalLight(0xffe8cc, 2.55);
+          keyLight.position.set(-4.5, 7, 6);
+          keyLight.castShadow = true;
+          keyLight.shadow.mapSize.set(1024, 1024);
+          keyLight.shadow.camera.left = -5;
+          keyLight.shadow.camera.right = 5;
+          keyLight.shadow.camera.top = 7;
+          keyLight.shadow.camera.bottom = -4;
+          keyLight.shadow.bias = -0.00035;
+          const bakeryLight = new THREE.PointLight(0xffd4a3, 17, 18, 2);
+          bakeryLight.position.set(-3.8, 5.8, 4.8);
+          const fillLight = new THREE.DirectionalLight(0xe4e2f2, 1.18);
+          fillLight.position.set(5, 3.5, 4);
+          const rimLight = new THREE.DirectionalLight(0xfff1dc, 1.45);
+          rimLight.position.set(1, 5, -6);
+          scene.add(hemisphere, keyLight, bakeryLight, fillLight, rimLight);
+
+          const reducedMotion = window.matchMedia("(prefers-reduced-motion: reduce)");
+          const baseCameraYaw = Math.atan2(cameraDirection.x, cameraDirection.z);
+          const baseCameraPitch = Math.asin(cameraDirection.y);
+          const worldPosition = new THREE.Vector3();
+          const lightDirection = new THREE.Vector3();
+          const viewDirection = new THREE.Vector3();
+          const halfDirection = new THREE.Vector3();
+          const worldNormal = new THREE.Vector3();
+          const worldQuaternion = new THREE.Quaternion();
+          let baseCameraDistance = 12;
+          let responsivePitchOffset = 0;
+          let stageVisible = true;
+          let frameId = 0;
+          let elapsed = 0;
+          let previousTime = 0;
+          let parallaxTargetX = 0;
+          let parallaxTargetY = 0;
+          let parallaxX = 0;
+          let parallaxY = 0;
+          let dragTarget = 0;
+          let dragRotation = 0;
+          let pointerDown = false;
+          let horizontalDrag = false;
+          let pointerStartX = 0;
+          let pointerStartY = 0;
+          let dragStartRotation = 0;
+          let orientationOrigin = null;
+
+          function placeCamera(distance, yawOffset = 0, pitchOffset = 0) {
+            const yaw = baseCameraYaw + yawOffset;
+            const pitch = baseCameraPitch + responsivePitchOffset + pitchOffset;
+            const horizontalDistance = Math.cos(pitch) * distance;
+            camera.position.set(
+              cameraTarget.x + Math.sin(yaw) * horizontalDistance,
+              cameraTarget.y + Math.sin(pitch) * distance,
+              cameraTarget.z + Math.cos(yaw) * horizontalDistance
+            );
+            camera.lookAt(cameraTarget);
+          }
+
+          function specularStrength(position, normal, power = 18) {
+            lightDirection.copy(bakeryLight.position).sub(position).normalize();
+            viewDirection.copy(camera.position).sub(position).normalize();
+            halfDirection.copy(lightDirection).add(viewDirection).normalize();
+            return Math.pow(Math.max(0, normal.dot(halfDirection)), power);
+          }
+
+          function updatePhysicalGlints() {
+            presentation.updateMatrixWorld(true);
+
+            cakeSparkles.forEach(({ sparkle, material, normal }) => {
+              sparkle.getWorldPosition(worldPosition);
+              worldNormal.copy(normal);
+              const highlight = specularStrength(worldPosition, worldNormal, 20);
+              material.opacity = THREE.MathUtils.clamp((highlight - 0.018) * 1.18, 0, 0.88);
+            });
+
+            starSparkles.forEach(({ sparkle, star, material, normal }) => {
+              sparkle.getWorldPosition(worldPosition);
+              star.getWorldQuaternion(worldQuaternion);
+              worldNormal.copy(normal).applyQuaternion(worldQuaternion).normalize();
+              const highlight = specularStrength(worldPosition, worldNormal, 15);
+              material.opacity = THREE.MathUtils.clamp((highlight - 0.035) * 1.24, 0, 0.94);
+            });
+
+            topperSparkles.getWorldPosition(worldPosition);
+            worldNormal.set(0, 0, 1);
+            const topperHighlight = specularStrength(worldPosition, worldNormal, 9);
+            topperSparkleMaterial.opacity = 0.08 + topperHighlight * 0.46;
+          }
+
+          function resetLight() {
+            bakeryLight.position.set(-3.8, 5.8, 4.8);
+            bakeryLight.intensity = 17;
+            keyLight.position.set(-4.5, 7, 6);
+          }
+
+          function renderStatic() {
+            presentation.rotation.set(0, 0, 0);
+            presentation.position.set(0, 0, 0);
+            resetLight();
+            placeCamera(baseCameraDistance);
+            updatePhysicalGlints();
+            renderer.render(scene, camera);
+          }
+
+          function animate(time) {
+            frameId = 0;
+            if (document.hidden || !stageVisible || reducedMotion.matches) {
+              renderStatic();
+              return;
+            }
+            const delta = Math.min(0.05, previousTime ? (time - previousTime) / 1000 : 0.016);
+            previousTime = time;
+            elapsed += delta;
+            const parallaxEase = 1 - Math.exp(-delta * 6.5);
+            const dragEase = 1 - Math.exp(-delta * 7.5);
+            parallaxX += (parallaxTargetX - parallaxX) * parallaxEase;
+            parallaxY += (parallaxTargetY - parallaxY) * parallaxEase;
+            dragRotation += (dragTarget - dragRotation) * dragEase;
+
+            presentation.rotation.set(0, 0, 0);
+            presentation.position.set(0, 0, 0);
+
+            const dollyProgress = THREE.MathUtils.clamp(elapsed / 10, 0, 1);
+            const dollyEase = 1 - Math.pow(1 - dollyProgress, 3);
+            const dollyScale = THREE.MathUtils.lerp(1.018, 1, dollyEase);
+            placeCamera(
+              baseCameraDistance * dollyScale,
+              dragRotation + parallaxX * 0.09,
+              -parallaxY * 0.07
+            );
+
+            const lightPhase = elapsed * 0.18;
+            bakeryLight.position.set(
+              -3.8 + Math.sin(lightPhase) * 0.34,
+              5.8 + Math.sin(lightPhase * 0.72 + 0.6) * 0.14,
+              4.8 + Math.cos(lightPhase * 0.86) * 0.26
+            );
+            bakeryLight.intensity = 17 + Math.sin(lightPhase * 0.64 + 0.4) * 0.45;
+            keyLight.position.x = -4.5 + Math.sin(lightPhase * 0.48) * 0.16;
+            keyLight.position.z = 6 + Math.cos(lightPhase * 0.48) * 0.12;
+
+            updatePhysicalGlints();
+            renderer.render(scene, camera);
+            frameId = requestAnimationFrame(animate);
+          }
+
+          function startRendering() {
+            if (frameId || document.hidden || !stageVisible) return;
+            previousTime = 0;
+            if (reducedMotion.matches) renderStatic();
+            else frameId = requestAnimationFrame(animate);
+          }
+
+          function stopRendering() {
+            cancelAnimationFrame(frameId);
+            frameId = 0;
+          }
+
+          function resizeScene() {
+            const bounds = stage.getBoundingClientRect();
+            const width = Math.max(1, Math.round(bounds.width));
+            const height = Math.max(1, Math.round(bounds.height));
+            const compact = width < 380 || height < 430;
+            const mobilePortrait = window.matchMedia("(max-width: 767px) and (orientation: portrait)").matches;
+            renderer.setPixelRatio(Math.min(window.devicePixelRatio || 1, width < 768 ? 1.5 : 2));
+            renderer.setSize(width, height, false);
+            camera.aspect = width / height;
+
+            if (mobilePortrait) {
+              const heroAspect = width / height;
+              const shortScreenFactor = THREE.MathUtils.clamp((heroAspect - 0.72) / 0.58, 0, 1);
+              camera.fov = THREE.MathUtils.lerp(29.5, 31, shortScreenFactor);
+              const verticalTargetFactor = Math.sqrt(shortScreenFactor);
+              cameraTarget.set(0, THREE.MathUtils.lerp(0.02, 0.45, verticalTargetFactor), 0);
+              responsivePitchOffset = THREE.MathUtils.lerp(0.025, 0.095, shortScreenFactor);
+            } else {
+              camera.fov = 31;
+              cameraTarget.set(0, -0.04, 0);
+              responsivePitchOffset = 0;
+            }
+            camera.updateProjectionMatrix();
+
+            const verticalFov = THREE.MathUtils.degToRad(camera.fov);
+            const halfFovTangent = Math.tan(verticalFov / 2);
+            if (mobilePortrait) {
+              const heroAspect = width / height;
+              const shortScreenFactor = THREE.MathUtils.clamp((heroAspect - 0.72) / 0.58, 0, 1);
+              const cakeBodyWidth = 4.45;
+              const targetWidthFill = THREE.MathUtils.lerp(0.9, 0.86, shortScreenFactor);
+              const widthFramingDistance = cakeBodyWidth
+                / (2 * halfFovTangent * camera.aspect * targetWidthFill);
+              const cakeAndTopperHeight = 5.9;
+              const allowedVerticalFill = THREE.MathUtils.lerp(0.96, 0.97, shortScreenFactor);
+              const verticalSafetyDistance = cakeAndTopperHeight
+                / (2 * halfFovTangent * allowedVerticalFill);
+              baseCameraDistance = Math.max(widthFramingDistance, verticalSafetyDistance);
+            } else {
+              const fitHeightDistance = 6.35 / (2 * halfFovTangent);
+              const fitWidthDistance = 6.2 / (2 * halfFovTangent * camera.aspect);
+              baseCameraDistance = Math.max(fitHeightDistance, fitWidthDistance) * 1.1;
+            }
+            placeCamera(
+              baseCameraDistance,
+              dragRotation + parallaxX * 0.09,
+              -parallaxY * 0.07
+            );
+
+            pearlSets.forEach((mesh) => {
+              mesh.count = compact ? mesh.userData.compactCount : mesh.userData.fullCount;
+            });
+            tinyDisco.visible = !compact;
+            optionalStar.visible = !compact;
+            const largeDiscoRadius = compact ? 0.5 : 0.58;
+            largeDisco.position.x = compact ? 1.86 : 1.95;
+            largeDisco.position.y = -1.94 + largeDiscoRadius;
+            largeDisco.position.z = compact ? 1.08 : 1.15;
+            largeDisco.scale.setScalar(largeDiscoRadius);
+            largeDiscoCradle.position.x = largeDisco.position.x;
+            largeDiscoCradle.position.z = largeDisco.position.z;
+            largeDiscoCradle.scale.setScalar(compact ? 0.88 : 1);
+            updatePhysicalGlints();
+            renderer.render(scene, camera);
+          }
+
+          function onPointerMove(event) {
+            if (reducedMotion.matches) return;
+            const bounds = threeCanvas.getBoundingClientRect();
+            if (!pointerDown && event.pointerType !== "touch") {
+              parallaxTargetX = THREE.MathUtils.clamp((event.clientX - bounds.left) / bounds.width - 0.5, -0.5, 0.5);
+              parallaxTargetY = THREE.MathUtils.clamp((event.clientY - bounds.top) / bounds.height - 0.5, -0.5, 0.5);
+              return;
+            }
+            if (!pointerDown) return;
+            const deltaX = event.clientX - pointerStartX;
+            const deltaY = event.clientY - pointerStartY;
+            if (!horizontalDrag && Math.abs(deltaX) > 7 && Math.abs(deltaX) > Math.abs(deltaY) + 3) {
+              horizontalDrag = true;
+              threeCanvas.setPointerCapture?.(event.pointerId);
+            }
+            if (horizontalDrag) {
+              if (event.cancelable) event.preventDefault();
+              dragTarget = THREE.MathUtils.clamp(dragStartRotation + deltaX / bounds.width * 0.36, -0.18, 0.18);
+            }
+          }
+
+          function onPointerDown(event) {
+            if (reducedMotion.matches || event.button > 0) return;
+            pointerDown = true;
+            horizontalDrag = false;
+            pointerStartX = event.clientX;
+            pointerStartY = event.clientY;
+            dragStartRotation = dragRotation;
+          }
+
+          function onPointerUp(event) {
+            if (horizontalDrag) threeCanvas.releasePointerCapture?.(event.pointerId);
+            pointerDown = false;
+            horizontalDrag = false;
+            dragTarget = 0;
+          }
+
+          function onPointerLeave() {
+            if (!pointerDown) {
+              parallaxTargetX = 0;
+              parallaxTargetY = 0;
+            }
+          }
+
+          function onDeviceOrientation(event) {
+            if (reducedMotion.matches || pointerDown || event.gamma == null || event.beta == null) return;
+            if (!orientationOrigin) {
+              orientationOrigin = { gamma: event.gamma, beta: event.beta };
+              return;
+            }
+            parallaxTargetX = THREE.MathUtils.clamp((event.gamma - orientationOrigin.gamma) / 24, -0.5, 0.5);
+            parallaxTargetY = THREE.MathUtils.clamp((event.beta - orientationOrigin.beta) / 24, -0.5, 0.5);
+          }
+
+          function onOrientationChange() {
+            orientationOrigin = null;
+            parallaxTargetX = 0;
+            parallaxTargetY = 0;
+          }
+
+          function onVisibilityChange() {
+            if (document.hidden) stopRendering();
+            else startRendering();
+          }
+
+          function onMotionChange() {
+            stopRendering();
+            parallaxTargetX = 0;
+            parallaxTargetY = 0;
+            parallaxX = 0;
+            parallaxY = 0;
+            dragTarget = 0;
+            dragRotation = 0;
+            if (reducedMotion.matches) renderStatic();
+            else startRendering();
+          }
+
+          const resizeObserver = new ResizeObserver(resizeScene);
+          resizeObserver.observe(stage);
+          const intersectionObserver = new IntersectionObserver(([entry]) => {
+            stageVisible = entry.isIntersecting;
+            if (stageVisible) startRendering();
+            else stopRendering();
+          }, { threshold: 0.04 });
+          intersectionObserver.observe(stage);
+
+          threeCanvas.addEventListener("pointermove", onPointerMove, { passive: false });
+          threeCanvas.addEventListener("pointerdown", onPointerDown);
+          threeCanvas.addEventListener("pointerup", onPointerUp);
+          threeCanvas.addEventListener("pointercancel", onPointerUp);
+          threeCanvas.addEventListener("pointerleave", onPointerLeave);
+          document.addEventListener("visibilitychange", onVisibilityChange);
+          window.addEventListener("deviceorientation", onDeviceOrientation, { passive: true });
+          window.addEventListener("orientationchange", onOrientationChange, { passive: true });
+          reducedMotion.addEventListener?.("change", onMotionChange);
+
+          resizeScene();
+          renderer.render(scene, camera);
+          startRendering();
+          if (reducedMotion.matches) {
+            threeCanvas.classList.remove("is-entering");
+          } else {
+            requestAnimationFrame(() => {
+              requestAnimationFrame(() => threeCanvas.classList.remove("is-entering"));
+            });
+          }
+
+          window.addEventListener("pagehide", () => {
+            stopRendering();
+            resizeObserver.disconnect();
+            intersectionObserver.disconnect();
+            threeCanvas.removeEventListener("pointermove", onPointerMove);
+            threeCanvas.removeEventListener("pointerdown", onPointerDown);
+            threeCanvas.removeEventListener("pointerup", onPointerUp);
+            threeCanvas.removeEventListener("pointercancel", onPointerUp);
+            threeCanvas.removeEventListener("pointerleave", onPointerLeave);
+            document.removeEventListener("visibilitychange", onVisibilityChange);
+            window.removeEventListener("deviceorientation", onDeviceOrientation);
+            window.removeEventListener("orientationchange", onOrientationChange);
+            reducedMotion.removeEventListener?.("change", onMotionChange);
+            textures.forEach((texture) => texture.dispose());
+            geometries.forEach((geometry) => geometry.dispose());
+            materials.forEach((material) => material.dispose());
+            renderer.dispose();
+          }, { once: true });
+        })
+        .catch(() => threeCanvas.classList.remove("is-entering"));
+    </script>
+  </body>
+</html>
