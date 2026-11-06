@@ -60,7 +60,6 @@ python3 -m http.server 8000   # then open http://localhost:8000
 | Action fails with `Invalid OAuth access token` | The token expired (the Action didn't run for 60+ days). Generate a new one (step 3) and update the secret. |
 | Action fails on `git push` | Turn on **Read and write permissions** (step 4.3). |
 | Commit appears but the site doesn't update | Check **Settings → Pages**. The source should be your `main` branch. |
-| Gallery filters show nothing | Filters match words in captions (e.g. "birthday", "wedding", "cupcake"). Use those words or hashtags in your posts. |
 
 ---
 
@@ -72,10 +71,9 @@ add a small watermark.
 
 To use one, paste its embed code into `gallery.html` in place of this line:
 ```html
-<div class="ig-grid" data-ig-feed data-filterable data-limit="36" aria-live="polite"></div>
+<div class="ig-grid" data-ig-feed data-limit="36" aria-live="polite"></div>
 ```
 (and the matching `data-ig-feed` line in `index.html` if you want it on the homepage too).
-The gallery's category filter buttons only work with Option A.
 
 ---
 
