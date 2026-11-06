@@ -2,7 +2,10 @@
 //
 // Usage:  IG_ACCESS_TOKEN=xxxx node scripts/fetch-instagram.mjs
 //
-// - Uses the Instagram API with Instagram Login (graph.instagram.com).
+// - Works with either token type Meta hands out:
+//     IG...  tokens -> Instagram API with Instagram Login (graph.instagram.com)
+//     EAA... tokens -> Instagram Graph API via Facebook (graph.facebook.com),
+//                      using the Instagram account ID in IG_USER_ID.
 // - Downloads each image into assets/instagram/ because Instagram's CDN
 //   URLs expire after a few days.
 // - Writes data/instagram.json, which js/main.js reads to render the feed.
@@ -11,12 +14,22 @@
 import { writeFile, mkdir, readdir, unlink } from "node:fs/promises";
 import path from "node:path";
 
-const TOKEN = process.env.IG_ACCESS_TOKEN;
+// Strip stray whitespace/quotes/"Bearer " that sneak in when copy-pasting.
+let TOKEN = (process.env.IG_ACCESS_TOKEN || "").trim().replace(/^bearer\s+/i, "").replace(/^["']|["']$/g, "").trim();
+// Catch the token accidentally pasted twice in a row.
+if (TOKEN.length % 2 === 0 && TOKEN.slice(0, TOKEN.length / 2) === TOKEN.slice(TOKEN.length / 2)) {
+  console.warn("Token looked like it was pasted twice; using a single copy.");
+  TOKEN = TOKEN.slice(0, TOKEN.length / 2);
+}
+// Never print the token, even when Meta echoes it back in an error.
+const redact = (text) => (TOKEN ? text.split(TOKEN).join("[token hidden]") : text);
+const IG_USER_ID = (process.env.IG_USER_ID || "17841466980768421").trim();
 const LIMIT = Number(process.env.IG_LIMIT || 36);
 const ROOT = path.resolve(path.dirname(new URL(import.meta.url).pathname), "..");
 const IMG_DIR = path.join(ROOT, "assets", "instagram");
 const DATA_FILE = path.join(ROOT, "data", "instagram.json");
 const API = "https://graph.instagram.com";
+const FB_API = "https://graph.facebook.com/v21.0";
 
 if (!TOKEN) {
   console.error("Missing IG_ACCESS_TOKEN environment variable. See INSTAGRAM_SETUP.md");
@@ -26,11 +39,12 @@ if (!TOKEN) {
 async function getJson(url) {
   const res = await fetch(url);
   const body = await res.json();
-  if (!res.ok || body.error) throw new Error(`Instagram API error: ${JSON.stringify(body.error || body)}`);
+  if (!res.ok || body.error) throw new Error(redact(`Instagram API error: ${JSON.stringify(body.error || body)}`));
   return body;
 }
 
 async function refreshToken() {
+  if (!TOKEN.startsWith("IG")) return; // only Instagram-login tokens use this refresh endpoint
   try {
     const r = await getJson(`${API}/refresh_access_token?grant_type=ig_refresh_token&access_token=${TOKEN}`);
     console.log(`Token refreshed; valid for ~${Math.round(r.expires_in / 86400)} more days.`);
@@ -40,9 +54,24 @@ async function refreshToken() {
   }
 }
 
+const FIELDS = "id,caption,media_type,media_url,thumbnail_url,permalink,timestamp";
+
 async function fetchPosts() {
-  const fields = "id,caption,media_type,media_url,thumbnail_url,permalink,timestamp";
-  let url = `${API}/me/media?fields=${fields}&limit=50&access_token=${TOKEN}`;
+  if (TOKEN.startsWith("IG")) return pagedFetch(`${API}/me/media?fields=${FIELDS}&limit=50&access_token=${TOKEN}`);
+  try {
+    return await pagedFetch(`${FB_API}/${IG_USER_ID}/media?fields=${FIELDS}&limit=50&access_token=${TOKEN}`);
+  } catch (fbErr) {
+    // Last resort: maybe it's an Instagram-login token with an unusual prefix.
+    try {
+      return await pagedFetch(`${API}/me/media?fields=${FIELDS}&limit=50&access_token=${TOKEN}`);
+    } catch (_) {
+      throw fbErr;
+    }
+  }
+}
+
+async function pagedFetch(firstUrl) {
+  let url = firstUrl;
   const posts = [];
   while (url && posts.length < LIMIT) {
     const page = await getJson(url);

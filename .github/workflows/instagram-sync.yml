@@ -2,7 +2,7 @@ name: Sync Instagram feed
 
 on:
   schedule:
-    - cron: "17 14 * * *" # daily, ~7am Pacific
+    - cron: "17 14 * * 1" # weekly, Mondays ~7am Pacific (6am during winter)
   workflow_dispatch: {}    # adds a "Run workflow" button in the Actions tab
 
 permissions:

@@ -11,7 +11,7 @@ There are two ways to fill it. **Option A** is free and fully automatic once set
 
 ## Option A (recommended): automatic daily sync with the Instagram API
 
-**How it works:** a GitHub Action runs every morning, asks Instagram for your latest
+**How it works:** a GitHub Action runs once a week, asks Instagram for your latest
 posts, saves the photos into `assets/instagram/`, updates `data/instagram.json`, and
 commits them. GitHub Pages republishes the site on its own. Your access token stays
 in GitHub Secrets and never appears on the public site.
@@ -46,7 +46,7 @@ Choose **Business** or **Creator**; either one works. This is free.
 ### 5. Run it
 **Actions** tab → **Sync Instagram feed** → **Run workflow**. In about a minute you'll see a
 commit titled "Update Instagram feed", and your photos will appear on the site shortly after.
-From then on it runs every day at about 7am Pacific.
+From then on it runs once a week, on Monday mornings (Pacific time).
 
 To test on your computer instead:
 ```bash
