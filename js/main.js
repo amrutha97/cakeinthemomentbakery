@@ -237,7 +237,7 @@ if (form) {
     const fields = [
       ["Name", val("name")], ["Email", val("email")], ["Phone", val("phone")],
       ["Event date", formatDate(val("date"))], ["Occasion", val("occasion")], ["Order type", val("type")],
-      ["Servings / guests", val("servings")], ["Flavor ideas", val("flavor")], ["How I found you", val("referral")],
+      ["Servings / guests", val("servings")], ["How I found you", val("referral")],
     ];
     const details = fields.filter(([, v]) => v).map(([label, v]) => `${label}: ${v}`);
     return [
