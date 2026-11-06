@@ -6,6 +6,7 @@
 //     IG...  tokens -> Instagram API with Instagram Login (graph.instagram.com)
 //     EAA... tokens -> Instagram Graph API via Facebook (graph.facebook.com),
 //                      using the Instagram account ID in IG_USER_ID.
+// - Pictures only: videos and reels are skipped.
 // - Downloads each image into assets/instagram/ because Instagram's CDN
 //   URLs expire after a few days.
 // - Writes data/instagram.json, which js/main.js reads to render the feed.
@@ -70,12 +71,17 @@ async function fetchPosts() {
   }
 }
 
+// Photos and photo albums only: skip videos/reels, and albums whose cover is a video.
+const isVideoUrl = (u = "") => /\.(mp4|mov)(\?|$)/i.test(u.split("?")[0] + "?");
+const isPicture = (p) =>
+  (p.media_type === "IMAGE" || p.media_type === "CAROUSEL_ALBUM") && p.media_url && !isVideoUrl(p.media_url);
+
 async function pagedFetch(firstUrl) {
   let url = firstUrl;
   const posts = [];
   while (url && posts.length < LIMIT) {
     const page = await getJson(url);
-    posts.push(...page.data);
+    posts.push(...page.data.filter(isPicture));
     url = page.paging?.next;
   }
   return posts.slice(0, LIMIT);
@@ -95,9 +101,7 @@ const keep = new Set();
 const posts = [];
 
 for (const p of raw) {
-  // Videos/reels use their thumbnail; photos and albums use the cover image.
-  const src = p.media_type === "VIDEO" ? p.thumbnail_url : p.media_url;
-  if (!src) continue;
+  const src = p.media_url; // photo, or the album's cover photo
   const file = `${p.id}.jpg`;
   keep.add(file);
   try {
